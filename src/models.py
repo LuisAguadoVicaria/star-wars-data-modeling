@@ -34,7 +34,8 @@ class Planets(Base):
     id = Column(Integer, primary_key=True)
     description = Column(String(250))
     latitude_longitude = Column(String(250))
-
+    born_in = relationship("Characters", back_populates="planetas")
+    
     def to_dict(self):
         return {}
 
@@ -44,7 +45,7 @@ class Characters(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     bio = Column(String(250))
-    birth_planet = relationship("Planets", back_populates="personajes")
+    birth_planet = Column(Integer, ForeignKey("planetas.id"))
 
     def to_dict(self):
         return {}
